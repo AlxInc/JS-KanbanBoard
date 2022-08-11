@@ -16,47 +16,43 @@ add_btn.addEventListener('click', () => {
 });
 
 const create_item = () => {
-     const item = document.createElement("div");
-    item.classList.add(item);
-    item.id.add(item-order);
-    item.draggable;
-    addEventListener('dragstart', (event) => {
-      return ev.DataTransfer.setData('text', id).ev.target;
-    });
-    addEventListener('dragend', (event) => {
-      return ev.DataTransfer.clearData()
-    });
-    let input = addEventListener('input')
-    ev.target.appendChild(input, item);
+  let item = document.createElement('div');
+  item.classList.add('item');
+  item.id =  'item-' + order;
+  item.draggable = true;
+  item.addEventListener('dragstart', event => event.dataTransfer.setData('text', event.target.id));
+  item.addEventListener('dragend', event =>event.dataTransfer.clearData());
 
-    const save_btn = document.createElement('button');
-    save_btn = document.innerHTML('Save');
-    document.getElementsByName(save_btn).addEventListener('click' => (){
-      document.innerHTML('error', "")
-      if (input != "") {
-        order++
-        item = document.innerHTML(input);
-        adding = false
-        } else {
-          error = document.innerHTML('message');
-        }
-        item.appendChild();
-        return create_item();
-    });
-   
-  
+  let input = document.createElement('input');
+  item.appendChild(input);
+
+  let save_btn = document.createElement('button');
+  save_btn.innerHTML = 'Save';
+  save_btn.addEventListener('click', () => {
+    error.innerHTML = '';
+    if (input.value !== '') {
+      order += 1;
+      item.innerHTML = input.value;
+      adding = false;
+    } else {
+      error.innerHTML = message;
+    }
+  });
+
+  item.appendChild(save_btn);
+
+  return item;
 };
 
 
-
 document.querySelectorAll('.drop').forEach(element => {
-  addEventListener('drop', event => {
-    event.preventDefault()
-    const id = ev.DataTransfer.getData('text') 
-    document.getElementById(id).append(event.target);
+  element.addEventListener('drop', event => {
+    event.preventDefault();
+    const id = event.dataTransfer.getData('text');
+    event.target.appendChild(document.getElementById(id));
   });
-    addEventListener('dragover', event => {
-    event.preventDefault()
+    element.addEventListener('dragover', event => 
+    event.preventDefault())
 
-  })
+  
 });
